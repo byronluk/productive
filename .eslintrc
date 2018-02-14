@@ -4,6 +4,11 @@
       "jsx-quotes": [2, "prefer-double"],
       "react/jsx-curly-spacing": [2, "always"],
       "react/prefer-stateless-function": [0],
-      "comma-dangle": "off"
+      "comma-dangle": "off",
+      "jsx-a11y/anchor-is-valid": [ "error", {
+        "components": [ "Link" ],
+        "specialLink": [ "hrefLeft", "hrefRight" ],
+        "aspects": [ "noHref"]
+      }]
     }
   }

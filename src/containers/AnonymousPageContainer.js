@@ -1,18 +1,25 @@
 import { connect } from 'react-redux';
 import AnonymousPage from '../components/AnonymousPage';
-import { updateSignUpFields, signUpClick } from '../actions/sign-up';
+import { updateSignUpFields, signUpClick, toggleLogInForm } from '../actions/sign-up';
+import { updateLogInFields } from '../actions/log-in';
 
-const mapStoreToProps = ({ signUp }) => {
-  return { signUp };
+const mapStoreToProps = ({ signUp, logIn }) => {
+  return { signUp, logIn };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleChange(event) {
+    handleSignUpChange(event) {
       const { target } = event;
-      console.log(1);
       dispatch(updateSignUpFields(target.value, target.name));
-    }
+    },
+    toggleLogIn(toggleLogIn) {
+      dispatch(toggleLogInForm(toggleLogIn));
+    },
+    handleLogInChange(event) {
+      const { target } = event;
+      dispatch(updateLogInFields(target.value, target.name));
+    },
   };
 };
 

@@ -1,13 +1,14 @@
 const initialState = {
   signUp: {
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    toggleLogIn: true,
   },
   logIn: {
-    email: null,
-    password: null,
+    email: '',
+    password: '',
   },
   auth: {
     status: 'ANONYMOUS',

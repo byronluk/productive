@@ -14,6 +14,8 @@ const initialState = {
     status: 'ANONYMOUS',
     email: null,
     photoURL: null,
+    firstName: null,
+    lastName: null,
     uid: null
   },
 };

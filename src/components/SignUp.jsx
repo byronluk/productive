@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SignUp = ({ signUp, handleChange, toggleLogIn }) => {
+const SignUp = ({ signUp, handleChange, handleClick, toggleLogIn }) => {
   return (
-    <form className="createAccount__form">
+    <form className="createAccount__form" onSubmit={ (e) => e.preventDefault() }>
       <h2>Sign Up</h2>
       <a
         href="#"
@@ -41,11 +41,19 @@ const SignUp = ({ signUp, handleChange, toggleLogIn }) => {
       />
       <button
         type="submit"
+        onClick={ handleClick }
       >
         Sign Up
       </button>
     </form>
   );
+};
+
+SignUp.propTypes = {
+  signUp: PropTypes.object,
+  handleChange: PropTypes.func,
+  handleClick: PropTypes.func,
+  toggleLogIn: PropTypes.func,
 };
 
 export default SignUp;

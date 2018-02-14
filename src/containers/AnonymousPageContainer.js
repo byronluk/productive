@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import AnonymousPage from '../components/AnonymousPage';
-import { updateSignUpFields, signUpClick, toggleLogInForm } from '../actions/sign-up';
+import { updateSignUpFields, toggleLogInForm } from '../actions/sign-up';
 import { updateLogInFields } from '../actions/log-in';
+import { createAccount, logIn } from '../actions/auth';
 
 const mapStoreToProps = ({ signUp, logIn }) => {
   return { signUp, logIn };
@@ -20,6 +21,12 @@ const mapDispatchToProps = (dispatch) => {
       const { target } = event;
       dispatch(updateLogInFields(target.value, target.name));
     },
+    signUpClick() {
+      dispatch(createAccount());
+    },
+    logInClick() {
+      dispatch(logIn());
+    }
   };
 };
 

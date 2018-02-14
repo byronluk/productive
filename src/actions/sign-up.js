@@ -6,12 +6,6 @@ export const updateSignUpFields = (input, name) => {
   };
 };
 
-export const signUpClick = () => {
-  return {
-    type: 'SIGNUP_CLICK',
-  };
-};
-
 export const toggleLogInForm = (toggleLogIn) => {
   return {
     type: 'TOGGLE_LOG_IN_FORM',

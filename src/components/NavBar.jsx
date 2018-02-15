@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const NavBar = ({ auth, logOutClick }) => {
   return (
     <nav>
-      <h1>{ auth.firstName }</h1>
+      <h1>{ auth.firstName + ' ' + auth.lastName }</h1>
       <button
         onClick={ logOutClick }
       >

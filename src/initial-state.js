@@ -18,6 +18,9 @@ const initialState = {
     lastName: null,
     uid: null
   },
+  homePage: {
+    toggleTodos: false,
+  }
 };
 
 export default initialState;

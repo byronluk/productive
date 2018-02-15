@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AnonymousPage from '../containers/AnonymousPageContainer';
-import HomePage from './HomePage';
+import HomePage from '../containers/HomePageContainer';
 
 const App = ({ auth }) => {
   return (

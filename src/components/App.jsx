@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AnonymousPage from '../containers/AnonymousPageContainer';
-import homePage from '../containers/homePageContainer';
+import HomePage from './HomePage';
 
 const App = ({ auth }) => {
   return (
     <main>
       { auth.status == 'ANONYMOUS' && <AnonymousPage /> }
-      { auth.status == 'LOGGED_IN' && <homePage /> }
+      { auth.status == 'LOGGED_IN' && <HomePage /> }
     </main>
   );
 };

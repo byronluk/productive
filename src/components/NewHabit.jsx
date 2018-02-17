@@ -1,28 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Habits = ({ newHabit, handleHabitNameChange, toggleHabitCreation }) => {
+const NewHabit = ({ newHabit, handleHabitNameChange }) => {
   return (
     <div>
+      <h1>New Habit</h1>
       <input
         type="text"
         placeholder="Add a Habit"
         value={ newHabit.habitName }
         onChange={ handleHabitNameChange }
       />
-      <button
-        onClick={ toggleHabitCreation }
-      >
-        Add Habit
-      </button>
     </div>
   );
 };
 
-Habits.propTypes = {
+NewHabit.propTypes = {
   newHabit: PropTypes.object,
   handleHabitNameChange: PropTypes.func,
-  toggleHabitCreation: PropTypes.func,
 };
 
-export default Habits;
+export default NewHabit;

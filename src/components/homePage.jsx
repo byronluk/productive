@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import NavBar from '../containers/NavBarContainer';
-import Habits from './Habits';
+import Habits from '../containers/HabitsContainer';
+import NewHabit from '../containers/NewHabitContainer';
 import Todos from './Todos';
 
-const HomePage = ({ homePage, toggleTodos }) => {
+const HomePage = ({ homePage, newHabit, toggleTodos }) => {
   return (
     <main>
       <NavBar />
@@ -16,6 +17,7 @@ const HomePage = ({ homePage, toggleTodos }) => {
           ? <Todos />
           : <Habits />
         }
+        { newHabit.toggleHabitCreation && <NewHabit /> }
       </div>
     </main>
   );
@@ -23,6 +25,7 @@ const HomePage = ({ homePage, toggleTodos }) => {
 
 HomePage.propTypes = {
   homePage: PropTypes.object,
+  newHabit: PropTypes.object,
   toggleTodos: PropTypes.func,
 };
 

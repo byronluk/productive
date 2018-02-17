@@ -20,7 +20,11 @@ const initialState = {
   },
   homePage: {
     toggleTodos: false,
-  }
+  },
+  newHabit: {
+    habitName: '',
+    toggleHabitCreation: false,
+  },
 };
 
 export default initialState;

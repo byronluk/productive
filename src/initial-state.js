@@ -24,6 +24,9 @@ const initialState = {
   newHabit: {
     habitName: '',
     toggleHabitCreation: false,
+    habitRecurrence: 'Daily',
+    habitType: 'Repetition',
+    habitOccurrence: 0,
   },
 };
 

@@ -14,8 +14,16 @@ export default function signUpReducer(state = initialState.signUp, action) {
         toggleLogIn: action.toggleLogIn,
       };
 
-    default: {
+    case 'LOGGED_IN':
+      return {
+        ...state,
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      };
+
+    default: 
       return state;
-    }
   }
 }

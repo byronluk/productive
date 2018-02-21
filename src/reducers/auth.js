@@ -2,6 +2,7 @@ import initialState from '../initial-state';
 
 export default function authReducer(state = initialState.auth, action) {
   switch (action.type) {
+    
     case 'LOGGED_IN':
       return {
         ...state,
@@ -22,8 +23,7 @@ export default function authReducer(state = initialState.auth, action) {
         lastName: null,
       };
 
-    default: {
+    default:
       return state;
-    }
   }
 }

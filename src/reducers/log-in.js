@@ -7,9 +7,15 @@ export default function signUpReducer(state = initialState.logIn, action) {
         ...state,
         [[action.name]]: action.input,
       };
+    
+    case 'LOGGED_IN':
+      return {
+        ...state,
+        email: '',
+        password: '',
+      };
 
-    default: {
+    default:
       return state;
-    }
   }
 }

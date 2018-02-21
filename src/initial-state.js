@@ -11,7 +11,7 @@ const initialState = {
     password: '',
   },
   auth: {
-    status: 'ANONYMOUS',
+    status: 'LOGGED_IN',
     email: null,
     photoURL: null,
     firstName: null,

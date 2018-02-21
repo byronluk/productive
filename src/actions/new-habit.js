@@ -1,3 +1,5 @@
+import { database } from '../firebase';
+
 export const handleHabitNameInput = (input) => {
   return {
     type: 'HABIT_NAME_INPUT',
@@ -27,9 +29,16 @@ export const selectHabitType = (value) => {
 };
 
 export const handleHabitOccurrence = (value) => {
-  console.log('action dispatched');
   return {
     type: 'HABIT_OCCURRENCE',
     habitOccurrence: value,
   };
 };
+
+export const createHabit = (event) => {
+  event.preventDefault();
+  return {
+
+  };
+};
+

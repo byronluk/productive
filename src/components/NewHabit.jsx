@@ -6,7 +6,9 @@ const NewHabit = ({
   handleHabitNameChange,
   selectHabitRecurrence,
   selectHabitType,
-  handleHabitOccurrence }) => {
+  handleHabitOccurrence,
+  createHabit,
+ }) => {
 
   return (
     <form>
@@ -48,7 +50,10 @@ const NewHabit = ({
         onChange={ handleHabitOccurrence }
       />
       {/* ^or how many hours/minutes a day? */}
-      <button type="submit">
+      <button
+        type="submit"
+        onClick={ createHabit }
+      >
         Create Habit
       </button>
     </form>
@@ -61,6 +66,7 @@ NewHabit.propTypes = {
   selectHabitRecurrence: PropTypes.func,
   selectHabitType: PropTypes.func,
   handleHabitOccurrence: PropTypes.func,
+  createHabit: PropTypes.func,
 };
 
 export default NewHabit;

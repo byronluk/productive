@@ -2,8 +2,8 @@ import { auth, database } from '../firebase';
 
 export const createAccount = () => {
   return (dispatch, getState) => {
-    dispatch({ type: 'CREATING_ACCOUNT' });
     const { firstName, lastName, email, password } = getState().signUp;
+    dispatch({ type: 'CREATING_ACCOUNT' });
      auth
       .createUserAndRetrieveDataWithEmailAndPassword(email, password)
       .then((user) => {
@@ -20,8 +20,8 @@ export const createAccount = () => {
 
 export const logIn = () => {
   return (dispatch, getState) => {
-    dispatch({ type: 'ATTEMPTING_LOGIN' });
     const { email, password } = getState().logIn;
+    dispatch({ type: 'ATTEMPTING_LOGIN' });
     auth
       .signInWithEmailAndPassword(email, password);
   };

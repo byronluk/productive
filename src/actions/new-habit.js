@@ -35,10 +35,38 @@ export const handleHabitOccurrence = (value) => {
   };
 };
 
-export const createHabit = (event) => {
+export const createNewHabit = (event) => {
   event.preventDefault();
-  return {
 
+  return (dispatch, getState) => {
+    const { auth, newHabit } = getState();
+    const formattedHabit = formatHabit(newHabit);
+
+    dispatch({ type: 'CREATING_NEW_HABIT' });
+    database.ref('users/' + auth.uid + '/habits/').push(formattedHabit);
   };
+};
+
+const formatHabit = (habit) => {
+  delete habit.toggleHabitCreation;
+  habit.creationDate = getCurrentDate();
+  habit.currentStreak = 0;
+  
+  return habit;
+};
+
+const getCurrentDate = () => {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+
+  if(dd < 10) {
+      dd = '0' + dd;
+  } 
+  if(mm < 10) {
+      mm = '0' + mm;
+  } 
+  return mm + '/' + dd + '/' + yyyy;
 };
 

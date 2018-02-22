@@ -33,6 +33,15 @@ export default function newHabitReducer(state = initialState.newHabit, action) {
         habitOccurrence: action.habitOccurrence,
       };
 
+    case 'CREATING_NEW_HABIT':
+      return {
+        habitName: '',
+        toggleHabitCreation: false,
+        habitRecurrence: 'Daily',
+        habitType: 'Repetition',
+        habitOccurrence: 0,
+      };
+
     default:
       return state;
   }

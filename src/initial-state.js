@@ -1,4 +1,5 @@
 const initialState = {
+  
   signUp: {
     firstName: '',
     lastName: '',
@@ -6,10 +7,12 @@ const initialState = {
     password: '',
     toggleLogIn: true,
   },
+
   logIn: {
     email: '',
     password: '',
   },
+
   auth: {
     status: 'LOGGED_IN',
     email: null,
@@ -18,9 +21,11 @@ const initialState = {
     lastName: null,
     uid: null
   },
+
   homePage: {
     toggleTodos: false,
   },
+
   newHabit: {
     habitName: '',
     toggleHabitCreation: false,

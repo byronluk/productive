@@ -6,7 +6,7 @@ import Habits from '../containers/HabitsContainer';
 import NewHabit from '../containers/NewHabitContainer';
 import Todos from './Todos';
 
-const HomePage = ({ homePage, newHabit, toggleTodos }) => {
+const HomePage = ({ homePage, newHabit, toggleTodos, habits }) => {
   return (
     <main>
       <NavBar />
@@ -15,7 +15,7 @@ const HomePage = ({ homePage, newHabit, toggleTodos }) => {
         <button onClick={ toggleTodos } disabled={ homePage.toggleTodos && true }>Todos</button> 
         { homePage.toggleTodos
           ? <Todos />
-          : <Habits />
+          : <Habits currentHabits={ habits } />
         }
         { newHabit.toggleHabitCreation && <NewHabit /> }
       </div>
@@ -27,6 +27,7 @@ HomePage.propTypes = {
   homePage: PropTypes.object,
   newHabit: PropTypes.object,
   toggleTodos: PropTypes.func,
+  habits: PropTypes.array,
 };
 
 export default HomePage;

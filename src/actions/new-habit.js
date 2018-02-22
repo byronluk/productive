@@ -40,17 +40,23 @@ export const createNewHabit = (event) => {
 
   return (dispatch, getState) => {
     const { auth, newHabit } = getState();
-    const formattedHabit = formatHabit(newHabit);
+    const habitURL = `users/${auth.uid}/habits/`;
+
+    const habitsRef = database.ref(habitURL);
+    const habitId = habitsRef.push().key;
+    const formattedHabit = formatHabit(newHabit, habitId);
 
     dispatch({ type: 'CREATING_NEW_HABIT' });
-    database.ref('users/' + auth.uid + '/habits/').push(formattedHabit);
+    database.ref(habitURL + habitId).set(formattedHabit);
   };
 };
 
-const formatHabit = (habit) => {
+//  helper functions
+const formatHabit = (habit, key) => {
   delete habit.toggleHabitCreation;
   habit.creationDate = getCurrentDate();
   habit.currentStreak = 0;
+  habit.habitId = key;
   
   return habit;
 };

@@ -1,4 +1,5 @@
 import { auth, database } from '../firebase';
+import { startListeningForHabits } from './home-page';
 
 export const createAccount = () => {
   return (dispatch, getState) => {
@@ -55,8 +56,13 @@ export const startListeningToAuthChanges = () => {
   return (dispatch) => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        database.ref('users/' + user.uid + '/info/').once('value').then((snapshot) => {
+        const userURL = `users/${user.uid}`;
+
+        database.ref(userURL + '/info/').once('value').then((snapshot) => {
           dispatch(loggedIn(user, snapshot.val()));
+        });
+        database.ref(userURL + '/habits/').on('child_added', (snapshot) => {
+          dispatch(startListeningForHabits(snapshot.val()));
         });
       } else {
         dispatch(loggedOut());      

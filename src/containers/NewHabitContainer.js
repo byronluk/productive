@@ -6,6 +6,7 @@ import {
     selectHabitType, 
     handleHabitOccurrence,
     createNewHabit,
+    toggleHabitCreation,
   } from '../actions/new-habit';
 
 const mapStateToProps = ({ newHabit }) => {
@@ -25,6 +26,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleHabitOccurrence(event) {
       dispatch(handleHabitOccurrence(event.target.value));
+    },
+    cancelHabitCreation() {
+      dispatch(toggleHabitCreation(false));
     },
     createHabit(event) {
       dispatch(createNewHabit(event));

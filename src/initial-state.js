@@ -14,7 +14,7 @@ const initialState = {
   },
 
   auth: {
-    status: 'LOGGED_IN',
+    status: 'ANONYMOUS',
     email: null,
     photoURL: null,
     firstName: null,
@@ -24,6 +24,7 @@ const initialState = {
 
   homePage: {
     toggleTodos: false,
+    habits: [],
   },
 
   newHabit: {

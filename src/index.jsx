@@ -9,6 +9,7 @@ import initialState from
 './initial-state';
 import App from './containers/AppContainer';
 import { startListeningToAuthChanges } from './actions/auth';
+import { startListeningForHabitChanges } from './actions/home-page';
 
 const middleware = [ thunk ];
 const enhancers = [];

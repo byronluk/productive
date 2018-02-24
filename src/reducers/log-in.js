@@ -9,11 +9,7 @@ export default function signUpReducer(state = initialState.logIn, action) {
       };
     
     case 'LOGGED_IN':
-      return {
-        ...state,
-        email: '',
-        password: '',
-      };
+      return initialState.logIn;
 
     default:
       return state;

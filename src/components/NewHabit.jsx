@@ -6,7 +6,7 @@ const NewHabit = ({
   handleHabitNameChange,
   selectHabitRecurrence,
   selectHabitType,
-  handleHabitOccurrence,
+  handleHabitGoalChange,
   cancelHabitCreation,
   createHabit,
  }) => {
@@ -47,8 +47,8 @@ const NewHabit = ({
       <input
         type="number"
         placeholder="How many times a day?"
-        value={ newHabit.habitOccurrence }
-        onChange={ handleHabitOccurrence }
+        value={ newHabit.dailyGoal }
+        onChange={ handleHabitGoalChange }
       />
       {/* ^or how many hours/minutes a day? */}
       <input
@@ -71,7 +71,7 @@ NewHabit.propTypes = {
   handleHabitNameChange: PropTypes.func,
   selectHabitRecurrence: PropTypes.func,
   selectHabitType: PropTypes.func,
-  handleHabitOccurrence: PropTypes.func,
+  handleHabitGoalChange: PropTypes.func,
   cancelHabitCreation: PropTypes.func,
   createHabit: PropTypes.func,
 };

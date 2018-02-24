@@ -28,10 +28,11 @@ export const selectHabitType = (value) => {
   };
 };
 
-export const handleHabitOccurrence = (value) => {
+export const handleHabitGoal = (value) => {
+  value = parseInt(value);
   return {
-    type: 'HABIT_OCCURRENCE',
-    habitOccurrence: value,
+    type: 'HABIT_GOALS',
+    dailyGoal: value,
   };
 };
 
@@ -55,7 +56,6 @@ export const createNewHabit = (event) => {
 const formatHabit = (habit, key) => {
   delete habit.toggleHabitCreation;
   habit.creationDate = getCurrentDate();
-  habit.currentStreak = 0;
   habit.habitId = key;
   
   return habit;

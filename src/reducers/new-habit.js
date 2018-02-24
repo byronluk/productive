@@ -27,20 +27,14 @@ export default function newHabitReducer(state = initialState.newHabit, action) {
         habitType: action.habitType,
       };
 
-    case 'HABIT_OCCURRENCE':
+    case 'HABIT_GOALS':
       return {
         ...state,
-        habitOccurrence: action.habitOccurrence,
+        dailyGoal: action.dailyGoal,
       };
 
     case 'CREATING_NEW_HABIT':
-      return {
-        habitName: '',
-        toggleHabitCreation: false,
-        habitRecurrence: 'Daily',
-        habitType: 'Repetition',
-        habitOccurrence: 0,
-      };
+      return initialState.newHabit;
 
     default:
       return state;

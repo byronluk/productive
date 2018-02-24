@@ -19,6 +19,9 @@ export default function homePageReducer(state = initialState.homePage, action) {
         habits: habitsCopy,
       };
 
+      case 'LOGGED_OUT':
+      return initialState.homePage;
+
     default:
       return state;
   }

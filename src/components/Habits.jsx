@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Habits = ({ newHabit, handleHabitNameChange, toggleHabitCreation, habits }) => {
+const Habits = ({ newHabit, handleHabitNameChange, toggleHabitCreation, currentHabits }) => {
   return (
     <div>
       <input
@@ -15,17 +15,20 @@ const Habits = ({ newHabit, handleHabitNameChange, toggleHabitCreation, habits }
       >
         Add Habit
       </button>
-
-      { !!habits && habits.map((habit, index) => {
-        
-      })}
+      <ul>
+        { currentHabits.length > 0 && currentHabits.map((habit) => {
+          return (
+            <li key={ habit.habitId }>{ habit.habitName }</li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
 
 Habits.propTypes = {
   newHabit: PropTypes.object,
-  habits: PropTypes.array,
+  currentHabits: PropTypes.array,
   handleHabitNameChange: PropTypes.func,
   toggleHabitCreation: PropTypes.func,
 };

@@ -6,7 +6,8 @@ import Habits from '../containers/HabitsContainer';
 import NewHabit from '../containers/NewHabitContainer';
 import Todos from './Todos';
 
-const HomePage = ({ homePage, newHabit, toggleTodos, habits }) => {
+const HomePage = ({ homePage, newHabit, toggleTodos }) => {
+  const { habits } = homePage;
   return (
     <main>
       <NavBar />
@@ -27,7 +28,6 @@ HomePage.propTypes = {
   homePage: PropTypes.object,
   newHabit: PropTypes.object,
   toggleTodos: PropTypes.func,
-  habits: PropTypes.array,
 };
 
 export default HomePage;

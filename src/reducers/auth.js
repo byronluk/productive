@@ -14,14 +14,7 @@ export default function authReducer(state = initialState.auth, action) {
       };
 
     case 'LOGGED_OUT':
-      return {
-        ...state,
-        status: 'ANONYMOUS',
-        email: null,
-        uid: null,
-        firstName: null,
-        lastName: null,
-      };
+      return initialState.auth;
 
     default:
       return state;

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Habit from './Habit';
 
 const Habits = ({ newHabit, handleHabitNameChange, toggleHabitCreation, currentHabits }) => {
   return (
@@ -18,7 +19,7 @@ const Habits = ({ newHabit, handleHabitNameChange, toggleHabitCreation, currentH
       <ul>
         { currentHabits.length > 0 && currentHabits.map((habit) => {
           return (
-            <li key={ habit.habitId }>{ habit.habitName }</li>
+            <Habit key={ habit.habitId } habit={ habit } />
           );
         })}
       </ul>

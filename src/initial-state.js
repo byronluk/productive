@@ -32,7 +32,9 @@ const initialState = {
     toggleHabitCreation: false,
     habitRecurrence: 'Daily',
     habitType: 'Repetition',
-    habitOccurrence: 0,
+    dailyGoal: 0,
+    dailyProgress: 0,
+    habitStreak: 0,
   },
 };
 

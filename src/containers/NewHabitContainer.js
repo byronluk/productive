@@ -4,7 +4,7 @@ import {
     handleHabitNameInput, 
     selectHabitRecurrence, 
     selectHabitType, 
-    handleHabitOccurrence,
+    handleHabitGoal,
     createNewHabit,
     toggleHabitCreation,
   } from '../actions/new-habit';
@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch) => {
     selectHabitType(event) {
       dispatch(selectHabitType(event.target.value));
     },
-    handleHabitOccurrence(event) {
-      dispatch(handleHabitOccurrence(event.target.value));
+    handleHabitGoalChange(event) {
+      dispatch(handleHabitGoal(event.target.value));
     },
     cancelHabitCreation() {
       dispatch(toggleHabitCreation(false));

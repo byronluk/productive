@@ -6,8 +6,7 @@ import Habits from '../containers/HabitsContainer';
 import NewHabit from '../containers/NewHabitContainer';
 import Todos from './Todos';
 
-const HomePage = ({ homePage, newHabit, toggleTodos }) => {
-  const { habits } = homePage;
+const HomePage = ({ homePage, toggleTodos }) => {
   return (
     <main>
       <NavBar />
@@ -16,9 +15,9 @@ const HomePage = ({ homePage, newHabit, toggleTodos }) => {
         <button onClick={ toggleTodos } disabled={ homePage.toggleTodos && true }>Todos</button> 
         { homePage.toggleTodos
           ? <Todos />
-          : <Habits currentHabits={ habits } />
+          : <Habits />
         }
-        { newHabit.toggleHabitCreation && <NewHabit /> }
+        { homePage.toggleHabitCreation && <NewHabit /> }
       </div>
     </main>
   );
@@ -26,7 +25,6 @@ const HomePage = ({ homePage, newHabit, toggleTodos }) => {
 
 HomePage.propTypes = {
   homePage: PropTypes.object,
-  newHabit: PropTypes.object,
   toggleTodos: PropTypes.func,
 };
 

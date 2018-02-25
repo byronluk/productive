@@ -6,8 +6,8 @@ import {
     selectHabitType, 
     handleHabitGoal,
     createNewHabit,
-    toggleHabitCreation,
   } from '../actions/new-habit';
+import { toggleHabitCreation } from '../actions/home-page';
 
 const mapStateToProps = ({ newHabit }) => {
   return { newHabit };
@@ -32,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     createHabit(event) {
       dispatch(createNewHabit(event));
+      dispatch(toggleHabitCreation(false));
     }
   };
 };

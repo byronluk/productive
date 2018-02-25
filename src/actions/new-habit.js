@@ -7,13 +7,6 @@ export const handleHabitNameInput = (input) => {
   };
 };
 
-export const toggleHabitCreation = (toggle) => {
-  return {
-    type: 'CREATING_HABIT',
-    toggleHabitCreation: toggle,
-  };
-};
-
 export const selectHabitRecurrence = (value) => {
   return {
     type: 'HABIT_RECCURENCE',
@@ -54,7 +47,6 @@ export const createNewHabit = (event) => {
 
 //  helper functions
 const formatHabit = (habit, key) => {
-  delete habit.toggleHabitCreation;
   habit.creationDate = getCurrentDate();
   habit.habitId = key;
   

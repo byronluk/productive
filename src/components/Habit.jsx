@@ -5,7 +5,7 @@ const Habit = ({ habit }) => {
   return (
     <li>
       { habit.habitName }
-      <span onClick={ () => console.log(1) }>
+      <span onClick={ () => console.log(habit.habitId) }>
         Plus button here
       </span>
     </li>

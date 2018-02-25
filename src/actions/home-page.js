@@ -6,13 +6,9 @@ export const toggleTodos = () => {
   };
 };
 
-export const startListeningForHabits = (habit) => {
+export const toggleHabitCreation = (toggle) => {
   return {
-    type: 'ADD_HABIT',
-    habit,
+    type: 'CREATING_HABIT',
+    toggleHabitCreation: toggle,
   };
-};
-
-export const startListeningForHabitChanges = () => {
-
 };

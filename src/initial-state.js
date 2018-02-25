@@ -24,12 +24,13 @@ const initialState = {
 
   homePage: {
     toggleTodos: false,
-    habits: [],
+    toggleHabitCreation: false,
   },
-
+  
+  habits: [],
+  
   newHabit: {
     habitName: '',
-    toggleHabitCreation: false,
     habitRecurrence: 'Daily',
     habitType: 'Repetition',
     dailyGoal: 0,

@@ -9,12 +9,6 @@ export default function newHabitReducer(state = initialState.newHabit, action) {
         habitName: action.habitName,
       };
 
-    case 'CREATING_HABIT':
-      return {
-        ...state,
-        toggleHabitCreation: action.toggleHabitCreation,
-      };
-
     case 'HABIT_RECCURENCE':
       return {
         ...state,

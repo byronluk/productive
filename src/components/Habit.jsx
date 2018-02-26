@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Habit = ({ habit }) => {
+const Habit = ({ habit, handleClick }) => {
   return (
     <li>
       { habit.habitName }
-      <span onClick={ () => console.log(habit.habitId) }>
+      <span value={ habit.habitId } onClick={ handleClick }>
         Plus button here
       </span>
     </li>
@@ -14,6 +14,7 @@ const Habit = ({ habit }) => {
 
 Habit.propTypes = {
   habit: PropTypes.object,
+  handleClick: PropTypes.func,
 };
 
 export default Habit;

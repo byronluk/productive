@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Habit from './Habit';
 
-const Habits = ({ habits, newHabit, handleHabitNameChange, toggleHabitCreation }) => {
+const Habits = ({ habits, newHabit, handleProgressChanges, handleHabitNameChange, toggleHabitCreation }) => {
   return (
     <div>
       <input
@@ -19,7 +19,7 @@ const Habits = ({ habits, newHabit, handleHabitNameChange, toggleHabitCreation }
       <ul>
         { habits.length > 0 && habits.map((habit) => {
           return (
-            <Habit key={ habit.habitId } habit={ habit } />
+            <Habit key={ habit.habitId } habit={ habit } handleClick={ handleProgressChanges } />
           );
         })}
       </ul>
@@ -32,6 +32,7 @@ Habits.propTypes = {
   habits: PropTypes.array,
   handleHabitNameChange: PropTypes.func,
   toggleHabitCreation: PropTypes.func,
+  handleProgressChanges: PropTypes.func,
 };
 
 export default Habits;

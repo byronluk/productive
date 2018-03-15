@@ -1,5 +1,5 @@
 import { auth, database } from '../firebase';
-import { startListeningForHabits } from './habits';
+// import { startListeningForHabits } from './habits';
 
 export const createAccount = () => {
   return (dispatch, getState) => {

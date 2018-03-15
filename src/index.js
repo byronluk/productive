@@ -4,14 +4,16 @@ import ReactDOM from 'react-dom';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import reducer from './reducers';
-import initialState from 
-'./initial-state';
-import App from './containers/AppContainer';
-import { startListeningToAuthChanges } from './actions/auth';
-import { startListeningForHabitChanges } from './actions/home-page';
+import promiseMiddleware from 'redux-promise-middleware';
 
-const middleware = [ thunk ];
+import reducer from './rootReducer';
+import initialState from  './initialState';
+import App from './app/AppContainer';
+
+import { startListeningToAuthChanges } from './auth/AuthActions';
+// import { startListeningForHabitChanges } from './actions/home-page';
+
+const middleware = [ promiseMiddleware(), thunk ];
 const enhancers = [];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -8,7 +8,7 @@ import promiseMiddleware from 'redux-promise-middleware';
 
 import reducer from './rootReducer';
 import initialState from  './initialState';
-import App from './app/AppContainer';
+import App from './components/App';
 
 import { startListeningToAuthChanges } from './auth/AuthActions';
 // import { startListeningForHabitChanges } from './actions/home-page';
@@ -30,7 +30,7 @@ store.dispatch(startListeningToAuthChanges());
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App auth={store.getState().auth} />
   </Provider>,
   document.getElementById('root')
 );

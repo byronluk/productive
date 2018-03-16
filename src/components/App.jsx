@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import NavBar from './NavBar';
+import NavBar from './common/NavBar';
 import AnonymousPage from './AnonymousPage';
 // import HomePage from '../containers/HomePageContainer';
 

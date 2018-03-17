@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 
-const SignUp = () => {
+let SignUp = ({ handleSubmit }) => {
   return (
     <div className="modal-dialog" role="document">
-      <form className="modal-content">
+      <form className="modal-content" onSubmit={handleSubmit}>
         <div className="modal-header">
           <h3 className="modal-title" id="signUpModalLabel">Sign Up</h3>
           <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -13,8 +14,9 @@ const SignUp = () => {
         </div>
         <div className="modal-body">
           <div className="form-group">
-            <input
+            <Field
               required
+              component="input"
               type="text"
               className="form-control"
               name="firstName"
@@ -22,8 +24,9 @@ const SignUp = () => {
             />
           </div>
           <div className="form-group">
-            <input
+            <Field
               required
+              component="input"
               type="text"
               className="form-control"
               name="lastName"
@@ -31,7 +34,9 @@ const SignUp = () => {
             />
           </div>
           <div className="form-group">
-            <input
+            <Field
+              required
+              component="input"
               type="email"
               name="email"
               className="form-control"
@@ -39,11 +44,12 @@ const SignUp = () => {
             />
           </div>
           <div className="form-group">
-            <input
+            <Field
               required
+              component="input"
               type="password"
               name="password"
-              className="form-control"              
+              className="form-control"
               placeholder="password"
             />
           </div>
@@ -57,8 +63,10 @@ const SignUp = () => {
             Close
           </button>
           <button
-            type="button"
-            className="btn btn-success">
+            type="submit"
+            className="btn btn-success"
+            data-dismiss="modal"
+          >
             Sign Up
           </button>
         </div>
@@ -67,7 +75,12 @@ const SignUp = () => {
   );
 };
 
+SignUp = reduxForm({
+  form: 'signup'
+})(SignUp);
+
 SignUp.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default SignUp;

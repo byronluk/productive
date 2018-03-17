@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SignUp from './auth/SignUp';
-import LogIn from './auth/LogIn';
+import SignUp from './auth/SignUpContainer';
+import LogIn from './auth/LogInContainer';
 
 const NavBar = ({ status }) => {
   return (

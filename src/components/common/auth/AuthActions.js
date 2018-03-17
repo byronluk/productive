@@ -1,9 +1,9 @@
-import { auth, database } from '../firebase';
+import { auth, database } from '../../../firebase';
 // import { startListeningForHabits } from './habits';
 
-export const createAccount = () => {
-  return (dispatch, getState) => {
-    const { firstName, lastName, email, password } = getState().signUp;
+export const createAccount = (values) => {
+  return (dispatch) => {
+    const { firstName, lastName, email, password } = values;
     dispatch({ type: 'CREATING_ACCOUNT' });
      auth
       .createUserAndRetrieveDataWithEmailAndPassword(email, password)
@@ -19,9 +19,9 @@ export const createAccount = () => {
   };
 };
 
-export const logIn = () => {
-  return (dispatch, getState) => {
-    const { email, password } = getState().logIn;
+export const logIn = (values) => {
+  return (dispatch) => {
+    const { email, password } = values;
     dispatch({ type: 'ATTEMPTING_LOGIN' });
     auth
       .signInWithEmailAndPassword(email, password);
@@ -61,9 +61,9 @@ export const startListeningToAuthChanges = () => {
         database.ref(userURL + '/info/').once('value').then((snapshot) => {
           dispatch(loggedIn(user, snapshot.val()));
         });
-        database.ref(userURL + '/habits/').on('child_added', (snapshot) => {
-          dispatch(startListeningForHabits(snapshot.val()));
-        });
+        // database.ref(userURL + '/habits/').on('child_added', (snapshot) => {
+        //   dispatch(startListeningForHabits(snapshot.val()));
+        // });
       } else {
         dispatch(loggedOut());      
       }

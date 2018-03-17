@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 
-const LogIn = () => {
+let LogIn = ({ handleSubmit }) => {
   return (
-    <div className="modal-dialog" role="document">
-      <form className="modal-content">
+    <div className="modal-dialog" role="document"> 
+      <form className="modal-content" onSubmit={handleSubmit}>
         <div className="modal-header">
           <h3 className="modal-title" id="logInModalLabel">Log In</h3>
           <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -13,7 +14,9 @@ const LogIn = () => {
         </div>
         <div className="modal-body">
           <div className="form-group">
-            <input
+            <Field
+              required
+              component="input"
               type="email"
               name="email"
               className="form-control"
@@ -21,8 +24,9 @@ const LogIn = () => {
             />
           </div>
           <div className="form-group">
-            <input
+            <Field
               required
+              component="input"
               type="password"
               name="password"
               className="form-control"              
@@ -39,8 +43,10 @@ const LogIn = () => {
             Close
           </button>
           <button
-            type="button"
-            className="btn btn-primary">
+            type="submit"
+            className="btn btn-primary"
+            data-dismiss="modal" 
+          >
             Log In
           </button>
         </div>
@@ -48,8 +54,10 @@ const LogIn = () => {
     </div>
   );
 };
-
 LogIn.propTypes = {
+  handleSubmit: PropTypes.func
 };
 
-export default LogIn;
+export default LogIn = reduxForm({
+  form: 'login',
+})(LogIn);

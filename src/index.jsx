@@ -10,7 +10,7 @@ import reducer from './rootReducer';
 import initialState from  './initialState';
 import App from './components/App';
 
-import { startListeningToAuthChanges } from './auth/AuthActions';
+import { startListeningToAuthChanges } from './components/common/auth/AuthActions';
 // import { startListeningForHabitChanges } from './actions/home-page';
 
 const middleware = [ promiseMiddleware(), thunk ];

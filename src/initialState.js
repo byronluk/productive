@@ -1,28 +1,30 @@
+// @flow
+
 const initialState = {
   auth: {
-    status: null,
-    email: null,
-    photoURL: null,
-    firstName: null,
-    lastName: null,
-    uid: null
+    status: "",
+    email: "",
+    photoURL: "",
+    firstName: "",
+    lastName: "",
+    uid: ""
   },
 
   homePage: {
     toggleTodos: false,
-    toggleHabitCreation: false,
+    toggleHabitCreation: false
   },
-  
+
   habits: [],
-  
+
   newHabit: {
-    habitName: '',
-    habitRecurrence: 'Daily',
-    habitType: 'Repetition',
+    habitName: "",
+    habitRecurrence: "Daily",
+    habitType: "Repetition",
     dailyGoal: 0,
     dailyProgress: 0,
-    habitStreak: 0,
-  },
+    habitStreak: 0
+  }
 };
 
 export default initialState;

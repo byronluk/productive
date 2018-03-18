@@ -10,9 +10,7 @@
     "browser": true,
     "node": true
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react", "flowtype"],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "semi": 2,

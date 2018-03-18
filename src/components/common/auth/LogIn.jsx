@@ -1,14 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import React from "react";
+import { Field, reduxForm } from "redux-form";
 
 let LogIn = ({ handleSubmit }) => {
   return (
-    <div className="modal-dialog" role="document"> 
+    <div className="modal-dialog" role="document">
       <form className="modal-content" onSubmit={handleSubmit}>
         <div className="modal-header">
-          <h3 className="modal-title" id="logInModalLabel">Log In</h3>
-          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <h3 className="modal-title" id="logInModalLabel">
+            Log In
+          </h3>
+          <button
+            type="button"
+            className="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -29,7 +35,7 @@ let LogIn = ({ handleSubmit }) => {
               component="input"
               type="password"
               name="password"
-              className="form-control"              
+              className="form-control"
               placeholder="password"
             />
           </div>
@@ -45,7 +51,7 @@ let LogIn = ({ handleSubmit }) => {
           <button
             type="submit"
             className="btn btn-primary"
-            data-dismiss="modal" 
+            data-dismiss="modal"
           >
             Log In
           </button>
@@ -54,10 +60,7 @@ let LogIn = ({ handleSubmit }) => {
     </div>
   );
 };
-LogIn.propTypes = {
-  handleSubmit: PropTypes.func
-};
 
-export default LogIn = reduxForm({
-  form: 'login',
-})(LogIn);
+export default (LogIn = reduxForm({
+  form: "login"
+})(LogIn));

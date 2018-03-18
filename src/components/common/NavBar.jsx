@@ -1,18 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SignUp from './auth/SignUpContainer';
-import LogIn from './auth/LogInContainer';
+// @flow
+import React from "react";
+import SignUp from "./auth/SignUpContainer";
+import LogIn from "./auth/LogInContainer";
 
-const NavBar = ({ status }) => {
+const NavBar = ({ status }: { status: string }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">Productive</a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
+      <a className="navbar-brand" href="#">
+        Productive
+      </a>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
       </button>
-      <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div
+        className="collapse navbar-collapse justify-content-end"
+        id="navbarNavAltMarkup"
+      >
         <div className="navbar-nav">
-          <button 
+          <button
             className="nav-item btn btn-outline-success"
             type="button"
             data-toggle="modal"
@@ -38,7 +51,7 @@ const NavBar = ({ status }) => {
         aria-labelledby="signUpModalLabel"
         aria-hidden="true"
       >
-      <SignUp />
+        <SignUp />
       </div>
       <div
         className="modal fade"
@@ -48,14 +61,10 @@ const NavBar = ({ status }) => {
         aria-labelledby="signUpModalLabel"
         aria-hidden="true"
       >
-      <LogIn />
+        <LogIn />
       </div>
     </nav>
   );
-};
-
-NavBar.propTypes = {
-  status: PropTypes.string
 };
 
 export default NavBar;

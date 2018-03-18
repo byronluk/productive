@@ -1,22 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import React from "react";
 
-import NavBar from './common/NavBar';
-import AnonymousPage from './AnonymousPage';
+import NavBar from "./common/NavBar";
+import AnonymousPage from "./AnonymousPage";
 // import HomePage from '../containers/HomePageContainer';
 
-const App = ({ auth }) => {
+type User = {
+  status: string,
+  email: string,
+  photoURL: string,
+  firstName: string,
+  lastName: string,
+  uid: string
+};
+
+const App = ({ auth }: { auth: User }) => {
   return (
     <main>
       <NavBar status={auth.status} />
-      { !auth.status && <AnonymousPage /> }
+      {!auth.status && <AnonymousPage />}
       {/* { auth.status == 'LOGGED_IN' && <HomePage /> } */}
     </main>
   );
-};
-
-App.propTypes = {
-  auth: PropTypes.object,
 };
 
 export default App;

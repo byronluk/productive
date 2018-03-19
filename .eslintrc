@@ -7,11 +7,17 @@
     }
   },
   "env": {
+    "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "jquery": true
   },
-  "plugins": ["react", "flowtype"],
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react", "flowtype", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
+  ],
   "rules": {
     "semi": 2,
     "no-console": 0

@@ -1,5 +1,7 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
+// @flow
+
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 
 let LogIn = ({ handleSubmit }) => {
   return (
@@ -48,11 +50,7 @@ let LogIn = ({ handleSubmit }) => {
           >
             Close
           </button>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            data-dismiss="modal"
-          >
+          <button type="submit" className="btn btn-primary">
             Log In
           </button>
         </div>
@@ -62,5 +60,5 @@ let LogIn = ({ handleSubmit }) => {
 };
 
 export default (LogIn = reduxForm({
-  form: "login"
+  form: 'login'
 })(LogIn));

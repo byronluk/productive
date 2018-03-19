@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 
 const AnonymousPage = () => {
   return (
@@ -9,7 +7,5 @@ const AnonymousPage = () => {
     </div>
   );
 };
-
-AnonymousPage.propTypes = {};
 
 export default AnonymousPage;

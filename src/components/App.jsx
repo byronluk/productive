@@ -1,12 +1,13 @@
 // @flow
-import React from "react";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import NavBar from "./common/NavBar";
-import AnonymousPage from "./AnonymousPage";
+import NavBar from './common/NavBar';
+import AnonymousPage from './AnonymousPage';
 // import HomePage from '../containers/HomePageContainer';
 
 type User = {
-  status: string,
+  status: ?string,
   email: string,
   photoURL: string,
   firstName: string,
@@ -24,4 +25,8 @@ const App = ({ auth }: { auth: User }) => {
   );
 };
 
-export default App;
+const mapStateToProps = ({ auth }) => {
+  return { auth };
+};
+
+export default connect(mapStateToProps)(App);

@@ -2,12 +2,12 @@
 
 const initialState = {
   auth: {
-    status: "",
-    email: "",
-    photoURL: "",
-    firstName: "",
-    lastName: "",
-    uid: ""
+    status: null,
+    email: '',
+    photoURL: '',
+    firstName: '',
+    lastName: '',
+    uid: ''
   },
 
   homePage: {
@@ -18,9 +18,9 @@ const initialState = {
   habits: [],
 
   newHabit: {
-    habitName: "",
-    habitRecurrence: "Daily",
-    habitType: "Repetition",
+    habitName: '',
+    habitRecurrence: 'Daily',
+    habitType: 'Repetition',
     dailyGoal: 0,
     dailyProgress: 0,
     habitStreak: 0

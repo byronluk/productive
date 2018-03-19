@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 
 let SignUp = ({ handleSubmit }) => {
@@ -7,8 +8,15 @@ let SignUp = ({ handleSubmit }) => {
     <div className="modal-dialog" role="document">
       <form className="modal-content" onSubmit={handleSubmit}>
         <div className="modal-header">
-          <h3 className="modal-title" id="signUpModalLabel">Sign Up</h3>
-          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <h3 className="modal-title" id="signUpModalLabel">
+            Sign Up
+          </h3>
+          <button
+            type="button"
+            className="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -62,11 +70,7 @@ let SignUp = ({ handleSubmit }) => {
           >
             Close
           </button>
-          <button
-            type="submit"
-            className="btn btn-success"
-            data-dismiss="modal"
-          >
+          <button type="submit" className="btn btn-success">
             Sign Up
           </button>
         </div>
@@ -78,9 +82,5 @@ let SignUp = ({ handleSubmit }) => {
 SignUp = reduxForm({
   form: 'signup'
 })(SignUp);
-
-SignUp.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
-};
 
 export default SignUp;

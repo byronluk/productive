@@ -1,9 +1,17 @@
 // @flow
-import React from "react";
-import SignUp from "./auth/SignUpContainer";
-import LogIn from "./auth/LogInContainer";
+import React from 'react';
+import { connect } from 'react-redux';
 
-const NavBar = ({ status }: { status: string }) => {
+import { logOut } from './auth/AuthActions';
+import SignUp from './auth/SignUpContainer';
+import LogIn from './auth/LogInContainer';
+
+type Props = {
+  status: ?string,
+  handleLogOut: () => void
+};
+
+const NavBar = ({ status, handleLogOut }: Props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">
@@ -24,24 +32,37 @@ const NavBar = ({ status }: { status: string }) => {
         className="collapse navbar-collapse justify-content-end"
         id="navbarNavAltMarkup"
       >
-        <div className="navbar-nav">
-          <button
-            className="nav-item btn btn-outline-success"
-            type="button"
-            data-toggle="modal"
-            data-target="#signUpModal"
-          >
-            Sign Up
-          </button>
-          <button
-            className="nav-item btn btn-outline-info mx-3"
-            type="button"
-            data-toggle="modal"
-            data-target="#logInModal"
-          >
-            Log In
-          </button>
-        </div>
+        {!status && (
+          <div className="navbar-nav">
+            <button
+              className="nav-item btn btn-outline-success"
+              type="button"
+              data-toggle="modal"
+              data-target="#signUpModal"
+            >
+              Sign Up
+            </button>
+            <button
+              className="nav-item btn btn-outline-info mx-3"
+              type="button"
+              data-toggle="modal"
+              data-target="#logInModal"
+            >
+              Log In
+            </button>
+          </div>
+        )}
+        {status === 'LOGGED_IN' && (
+          <div className="navbar-nav">
+            <button
+              className="nav-item btn btn-outline-info mx-3"
+              type="button"
+              onClick={handleLogOut}
+            >
+              Log Out
+            </button>
+          </div>
+        )}
       </div>
       <div
         className="modal fade"
@@ -67,4 +88,12 @@ const NavBar = ({ status }: { status: string }) => {
   );
 };
 
-export default NavBar;
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    handleLogOut() {
+      dispatch(logOut());
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NavBar);

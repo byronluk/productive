@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && node server/index.js",
-    "build": "npm run webpack"
+    "build": "npm run webpack",
+    "flow": "flow"
   },
   "author": "Byron Luk",
   "license": "ISC",
@@ -40,6 +41,7 @@
     "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.6.1",
     "flow-bin": "^0.68.0"
   }

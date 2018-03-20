@@ -13,7 +13,7 @@ type Props = {
 
 const NavBar = ({ status, handleLogOut }: Props) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
       <a className="navbar-brand" href="#">
         Productive
       </a>
@@ -28,10 +28,7 @@ const NavBar = ({ status, handleLogOut }: Props) => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <div
-        className="collapse navbar-collapse justify-content-end"
-        id="navbarNavAltMarkup"
-      >
+      <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         {!status && (
           <div className="navbar-nav">
             <button
@@ -54,36 +51,36 @@ const NavBar = ({ status, handleLogOut }: Props) => {
         )}
         {status === 'LOGGED_IN' && (
           <div className="navbar-nav">
-            <button
-              className="nav-item btn btn-outline-info mx-3"
-              type="button"
-              onClick={handleLogOut}
-            >
+            <button className="nav-item btn btn-outline-info mx-3" type="button" onClick={handleLogOut}>
               Log Out
             </button>
           </div>
         )}
       </div>
-      <div
-        className="modal fade"
-        id="signUpModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="signUpModalLabel"
-        aria-hidden="true"
-      >
-        <SignUp />
-      </div>
-      <div
-        className="modal fade"
-        id="logInModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="signUpModalLabel"
-        aria-hidden="true"
-      >
-        <LogIn />
-      </div>
+      {!status && (
+        <div>
+          <div
+            className="modal fade"
+            id="signUpModal"
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="signUpModalLabel"
+            aria-hidden="true"
+          >
+            <SignUp />
+          </div>
+          <div
+            className="modal fade"
+            id="logInModal"
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="signUpModalLabel"
+            aria-hidden="true"
+          >
+            <LogIn />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

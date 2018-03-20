@@ -1,10 +1,11 @@
 // @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 
 import NavBar from './common/NavBar';
 import AnonymousPage from './AnonymousPage';
-// import HomePage from '../containers/HomePageContainer';
+import HomePage from './HomePage';
 
 type User = {
   status: ?string,
@@ -20,7 +21,7 @@ const App = ({ auth }: { auth: User }) => {
     <main>
       <NavBar status={auth.status} />
       {!auth.status && <AnonymousPage />}
-      {/* { auth.status == 'LOGGED_IN' && <HomePage /> } */}
+      {auth.status == 'LOGGED_IN' && <HomePage />}
     </main>
   );
 };

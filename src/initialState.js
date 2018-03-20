@@ -11,8 +11,7 @@ const initialState = {
   },
 
   homePage: {
-    toggleTodos: false,
-    toggleHabitCreation: false
+    toggleTodos: false
   },
 
   habits: [],

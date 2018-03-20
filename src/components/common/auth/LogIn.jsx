@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import type { FormProps } from 'redux-form';
 
-let LogIn = ({ handleSubmit }) => {
+let LogIn = ({ handleSubmit }: FormProps) => {
   return (
     <div className="modal-dialog" role="document">
       <form className="modal-content" onSubmit={handleSubmit}>
@@ -11,25 +12,13 @@ let LogIn = ({ handleSubmit }) => {
           <h3 className="modal-title" id="logInModalLabel">
             Log In
           </h3>
-          <button
-            type="button"
-            className="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div className="modal-body">
           <div className="form-group">
-            <Field
-              required
-              component="input"
-              type="email"
-              name="email"
-              className="form-control"
-              placeholder="email"
-            />
+            <Field required component="input" type="email" name="email" className="form-control" placeholder="email" />
           </div>
           <div className="form-group">
             <Field
@@ -43,11 +32,7 @@ let LogIn = ({ handleSubmit }) => {
           </div>
         </div>
         <div className="modal-footer">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            data-dismiss="modal"
-          >
+          <button type="button" className="btn btn-secondary" data-dismiss="modal">
             Close
           </button>
           <button type="submit" className="btn btn-primary">

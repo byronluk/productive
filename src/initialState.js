@@ -14,16 +14,7 @@ const initialState = {
     toggleTodos: false
   },
 
-  habits: [],
-
-  newHabit: {
-    habitName: '',
-    habitRecurrence: 'Daily',
-    habitType: 'Repetition',
-    dailyGoal: 0,
-    dailyProgress: 0,
-    habitStreak: 0
-  }
+  habits: []
 };
 
 export default initialState;

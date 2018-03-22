@@ -1,9 +1,14 @@
+// @flow
+
 import { connect } from 'react-redux';
 import NewHabit from './NewHabit';
 
-const mapStateToProps = ({ form }) => {
-  const { newHabit } = form;
-  return { newHabit };
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    onSubmit(values) {
+      console.log(values);
+    }
+  };
 };
 
-export default connect(mapStateToProps)(NewHabit);
+export default connect(null, mapDispatchToProps)(NewHabit);

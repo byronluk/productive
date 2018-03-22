@@ -2,6 +2,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import type { FormProps } from 'redux-form';
+import DailySelector from './DailySelector';
 
 let NewHabit = ({ handleSubmit }: FormProps) => {
   return (
@@ -11,12 +12,7 @@ let NewHabit = ({ handleSubmit }: FormProps) => {
           <h5 className="modal-title" id="addHabitModalLabel">
             New Habit
           </h5>
-          <button
-            type="button"
-            className="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -30,19 +26,44 @@ let NewHabit = ({ handleSubmit }: FormProps) => {
               placeholder="habit name"
             />
           </div>
-
-          <div className="form-group">
-            <div className="btn-group-toggle" data-toggle="buttons">
-              <label className="btn btn-secondary active">
-                <input type="radio" autoComplete="off" value="Daily" />
+          <div className="form-group container">
+            <p className="lead text-center">I want to repeat this habit</p>
+            <div className="btn-group-toggle row justify-content-around mb-4" data-toggle="buttons">
+              <label
+                className="btn btn-outline-dark btn-block col-5 border-0 active"
+                data-toggle="collapse"
+                data-target="#dailySelectCollapse"
+                role="button"
+                aria-expanded="false"
+                aria-controls="dailySelectCollapse"
+              >
+                <input type="radio" autoComplete="off" />
                 Daily
               </label>
-              <label className="btn btn-secondary">
-                <input type="radio" autoComplete="off" value="Weekly" />
+              <span className="lead">or</span>
+              <label
+                className="btn btn-outline-dark btn-block col-5 border-0 my-0 collapsed"
+                data-toggle="collapse"
+                data-target="#weeklySelectCollapse"
+                role="button"
+                aria-expanded="false"
+                aria-controls="weeklySelectCollapse"
+              >
+                <input type="radio" autoComplete="off" />
                 Weekly
               </label>
             </div>
+            {/* add values for daily or weekly inside of accordion form */}
+            <div id="accordion">
+              <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
+                <Field name="daily" component={DailySelector} />
+              </div>
+              <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
+                <div className="card card-body">Weeks</div>
+              </div>
+            </div>
           </div>
+
           <div className="form-group">
             <p>Form group</p>
           </div>
@@ -62,11 +83,7 @@ let NewHabit = ({ handleSubmit }: FormProps) => {
           </div>
         </div>
         <div className="modal-footer">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            data-dismiss="modal"
-          >
+          <button type="button" className="btn btn-secondary" data-dismiss="modal">
             Close
           </button>
           <button type="submit" className="btn btn-primary">

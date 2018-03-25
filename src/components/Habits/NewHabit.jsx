@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, Fields, reduxForm } from 'redux-form';
 import type { FormProps } from 'redux-form';
 import DailySelector from './DailySelector';
 
@@ -30,7 +30,7 @@ let NewHabit = ({ handleSubmit }: FormProps) => {
             <p className="lead text-center">I want to repeat this habit</p>
             <div className="btn-group-toggle row justify-content-around mb-4" data-toggle="buttons">
               <label
-                className="btn btn-outline-dark btn-block col-5 border-0 active"
+                className="btn btn-outline-dark btn-block col-5 border-0 collapsed"
                 data-toggle="collapse"
                 data-target="#dailySelectCollapse"
                 role="button"
@@ -53,32 +53,51 @@ let NewHabit = ({ handleSubmit }: FormProps) => {
                 Weekly
               </label>
             </div>
-            {/* add values for daily or weekly inside of accordion form */}
             <div id="accordion">
-              <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
-                <Field name="daily" component={DailySelector} />
+              <div className="collapse" id="dailySelectCollapse" data-parent="#accordion">
+                <Fields
+                  names={['day.M', 'day.T', 'day.W', 'day.Th', 'day.F', 'day.S', 'day.Su']}
+                  component={DailySelector}
+                />
               </div>
               <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
                 <div className="card card-body">Weeks</div>
               </div>
             </div>
           </div>
-
+          <div className="dropdown-divider my-3" />
           <div className="form-group">
-            <p>Form group</p>
-          </div>
-          {/* add in options to select which days */}
-
-          <div className="form-group">
-            <div className="btn-group-toggle" data-toggle="buttons">
-              <label className="btn btn-secondary active">
-                <input type="radio" autoComplete="off" value="Daily" />
-                Repetition
+            <div className="btn-group-toggle row justify-content-around mb-4" data-toggle="buttons">
+              <label
+                className="btn btn-outline-dark btn-block col-5 border-0"
+                data-toggle="collapse"
+                data-target="#setMultipleCollapse"
+                role="button"
+                aria-expanded="false"
+                aria-controls="setMultipleCollapse"
+              >
+                <input type="checkbox" autoComplete="off" />
+                Set Multiple
               </label>
-              <label className="btn btn-secondary">
-                <input type="radio" autoComplete="off" value="Weekly" />
-                Duration
+              <label
+                className="btn btn-outline-dark btn-block col-5 border-0 my-0 collapsed"
+                data-toggle="collapse"
+                data-target="#setDurationCollapse"
+                role="button"
+                aria-expanded="false"
+                aria-controls="setDurationCollapse"
+              >
+                <input type="checkbox" autoComplete="off" />
+                Set Duration
               </label>
+            </div>
+            <div className="row">
+              <div className="col-5 collapse" id="setMultipleCollapse">
+                <input className="form-control ml-2 w-25" type="number" />
+              </div>
+              <div className="col-5 collapse" id="setDurationCollapse">
+                <input className="form-control ml-2 w-25" type="number" />
+              </div>
             </div>
           </div>
         </div>
@@ -94,6 +113,13 @@ let NewHabit = ({ handleSubmit }: FormProps) => {
     </div>
   );
 };
+/* add text for what type of habit I am going to create
+ * e.g. I want to medidate 
+ * 3 times daily
+ * on Sunday, Monday, and Tuesday
+ * for 2 hours each rep. 
+ * habit name -- daily -- days in week -- repetition && duration
+ */
 
 NewHabit = reduxForm({
   form: 'newHabit'

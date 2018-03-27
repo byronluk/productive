@@ -42,6 +42,25 @@ class DailySelector extends React.Component<Props, State> {
       weekends: ''
     };
   }
+  // add onclick handler to remove focus when clicking outside of form
+  handleDayClick = event => {
+    const day = event.target.name.match(/[a-zA-Z]+$/)[0];
+    this.setState(prevState => {
+      const stateCopy = Object.assign({}, prevState);
+      console.log(stateCopy);
+      for (let prop in stateCopy) {
+        stateCopy[prop] = stateCopy[prop].replace(/focus/, '');
+      }
+      if (/active/.test(stateCopy[day])) {
+        stateCopy[day] = stateCopy[day].replace(/active/, '');
+      } else {
+        stateCopy[day] += ' active';
+      }
+      stateCopy[day] += ' focus';
+      console.log(stateCopy);
+      return stateCopy;
+    });
+  };
 
   toggleWeekdays = () => {
     const { toggleDays } = this.props;
@@ -84,31 +103,73 @@ class DailySelector extends React.Component<Props, State> {
           className="row justify-content-around btn-group-toggle mb-3"
         >
           <label className={`btn btn-outline-secondary border-0 ${Su}`}>
-            <input {...day.Su.input} defaultChecked type="checkbox" autoComplete="off" />
+            <input
+              {...day.Su.input}
+              onClick={this.handleDayClick}
+              defaultChecked
+              type="checkbox"
+              autoComplete="off"
+            />
             <span className="h4 mx-1">S</span>
           </label>
           <label className={`btn btn-outline-secondary border-0 ${M}`}>
-            <input {...day.M.input} defaultChecked type="checkbox" autoComplete="off" />
+            <input
+              {...day.M.input}
+              onClick={this.handleDayClick}
+              defaultChecked
+              type="checkbox"
+              autoComplete="off"
+            />
             <span className="h4 mx-0">M</span>
           </label>
           <label className={`btn btn-outline-secondary border-0 ${T}`}>
-            <input {...day.T.input} defaultChecked type="checkbox" autoComplete="off" />
+            <input
+              {...day.T.input}
+              onClick={this.handleDayClick}
+              defaultChecked
+              type="checkbox"
+              autoComplete="off"
+            />
             <span className="h4 mx-1">T</span>
           </label>
           <label className={`btn btn-outline-secondary border-0 ${W}`}>
-            <input {...day.W.input} defaultChecked type="checkbox" autoComplete="off" />
+            <input
+              {...day.W.input}
+              onClick={this.handleDayClick}
+              defaultChecked
+              type="checkbox"
+              autoComplete="off"
+            />
             <span className="h4 mx-0">W</span>
           </label>
           <label className={`btn btn-outline-secondary border-0 ${Th}`}>
-            <input {...day.Th.input} defaultChecked type="checkbox" autoComplete="off" />
+            <input
+              {...day.Th.input}
+              onClick={this.handleDayClick}
+              defaultChecked
+              type="checkbox"
+              autoComplete="off"
+            />
             <span className="h4 mx-1">T</span>
           </label>
           <label className={`btn btn-outline-secondary border-0 ${F}`}>
-            <input {...day.F.input} defaultChecked type="checkbox" autoComplete="off" />
+            <input
+              {...day.F.input}
+              onClick={this.handleDayClick}
+              defaultChecked
+              type="checkbox"
+              autoComplete="off"
+            />
             <span className="h4 mx-1">F</span>
           </label>
           <label className={`btn btn-outline-secondary border-0 ${S}`}>
-            <input {...day.S.input} defaultChecked type="checkbox" autoComplete="off" />
+            <input
+              {...day.S.input}
+              onClick={this.handleDayClick}
+              defaultChecked
+              type="checkbox"
+              autoComplete="off"
+            />
             <span className="h4 mx-1">S</span>
           </label>
         </div>

@@ -1,10 +1,10 @@
 import firebase from 'firebase';
 
 const config = {
-  apiKey: 'AIzaSyCLGFanC-Zmpg1V_D9lW15Q8CXNVKIF4j8',
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: 'productive-483e5.firebaseapp.com',
   databaseURL: 'https://productive-483e5.firebaseio.com',
-  projectId: 'productive-483e5',
+  projectId: process.env.FIREBASE_PROJECT_ID,
   storageBucket: 'productive-483e5.appspot.com',
   messagingSenderId: '28977859912'
 };

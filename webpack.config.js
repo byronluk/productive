@@ -1,16 +1,19 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, '/src'),
 
   entry: {
-    javascript: './index',
+    javascript: './index'
   },
   devtool: 'source-map',
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/dist')
   },
+
+  plugins: [new HtmlWebpackPlugin({ template: 'index.html' })],
 
   resolve: {
     alias: {
@@ -28,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loader: 'file?name=[name].[ext]'
+        loader: ['html-loader']
       }
     ]
   }

@@ -8,13 +8,13 @@ const initialState = {
     firstName: '',
     lastName: '',
     uid: ''
-  },
+  }
 
-  homePage: {
-    toggleTodos: false
-  },
+  // homePage: {
+  //   toggleTodos: false
+  // },
 
-  habits: []
+  // habits: []
 };
 
 export default initialState;

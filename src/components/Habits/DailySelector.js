@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import type { FieldProps } from 'redux-form';
+import { formValues } from 'redux-form';
 
 type Props = {
   day: {
@@ -42,22 +43,36 @@ class DailySelector extends React.Component<Props, State> {
       weekends: ''
     };
   }
-  // add onclick handler to remove focus when clicking outside of form
-  handleDayClick = event => {
-    const day = event.target.name.match(/[a-zA-Z]+$/)[0];
+  // loop through state to change focus and active classes on days
+  handleDayClick = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
+    let day = event.currentTarget.name.substr(4);
     this.setState(prevState => {
       const stateCopy = Object.assign({}, prevState);
-      console.log(stateCopy);
       for (let prop in stateCopy) {
-        stateCopy[prop] = stateCopy[prop].replace(/focus/, '');
+        stateCopy[prop] = stateCopy[prop].trim().replace(/focus/, '');
       }
       if (/active/.test(stateCopy[day])) {
-        stateCopy[day] = stateCopy[day].replace(/active/, '');
+        stateCopy[day] = stateCopy[day].trim().replace(/active/, '');
       } else {
         stateCopy[day] += ' active';
       }
       stateCopy[day] += ' focus';
-      console.log(stateCopy);
+      return stateCopy;
+    });
+  };
+
+  handleChange = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
+    console.log(event.currentTarget.name.substr(4));
+    console.log(event.currentTarget.value);
+  };
+
+  handleBlur = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
+    let day = event.currentTarget.name.substr(4);
+    console.log(day);
+    this.setState(prevState => {
+      const stateCopy = Object.assign({}, prevState);
+      stateCopy[day] = stateCopy[day].trim().replace(/focus/, '');
+
       return stateCopy;
     });
   };
@@ -106,6 +121,7 @@ class DailySelector extends React.Component<Props, State> {
             <input
               {...day.Su.input}
               onClick={this.handleDayClick}
+              onBlur={this.handleBlur}
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -116,6 +132,7 @@ class DailySelector extends React.Component<Props, State> {
             <input
               {...day.M.input}
               onClick={this.handleDayClick}
+              onBlur={this.handleBlur}
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -126,6 +143,7 @@ class DailySelector extends React.Component<Props, State> {
             <input
               {...day.T.input}
               onClick={this.handleDayClick}
+              onBlur={this.handleBlur}
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -136,6 +154,7 @@ class DailySelector extends React.Component<Props, State> {
             <input
               {...day.W.input}
               onClick={this.handleDayClick}
+              onBlur={this.handleBlur}
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -146,6 +165,7 @@ class DailySelector extends React.Component<Props, State> {
             <input
               {...day.Th.input}
               onClick={this.handleDayClick}
+              onBlur={this.handleBlur}
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -156,6 +176,7 @@ class DailySelector extends React.Component<Props, State> {
             <input
               {...day.F.input}
               onClick={this.handleDayClick}
+              onBlur={this.handleBlur}
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -166,6 +187,7 @@ class DailySelector extends React.Component<Props, State> {
             <input
               {...day.S.input}
               onClick={this.handleDayClick}
+              onBlur={this.handleBlur}
               defaultChecked
               type="checkbox"
               autoComplete="off"

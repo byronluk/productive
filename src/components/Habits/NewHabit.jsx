@@ -5,6 +5,8 @@ import type { FormProps } from 'redux-form';
 import DailySelector from './DailySelector';
 import WeeklySelector from './WeeklySelector';
 
+// TODO: rewrite component to not rely on redux form
+
 type Props = {
   ...FormProps,
   onSubmit: () => void,

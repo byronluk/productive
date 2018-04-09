@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 
-const WeeklySelector = (fields: FieldsProps) => {
+const WeeklySelector = fields => {
   return (
     <React.Fragment>
       <div

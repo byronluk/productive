@@ -1,28 +1,28 @@
 // @flow
 
 import { auth, database } from '../../../firebase';
-import { user, Action, ThunkAction } from '../../types';
+import type { user, Action, ThunkAction } from '../../types';
+import { reset } from 'redux-form';
 // import { startListeningForHabits } from './habits';
 
 export const createAccount = (values: user): ThunkAction => {
   return dispatch => {
     const { firstName, lastName, email, password } = values;
     dispatch({ type: 'CREATING_ACCOUNT' });
-    auth
-      .createUserAndRetrieveDataWithEmailAndPassword(email, password)
-      .then(user => {
-        database.ref('users/' + user.user.uid).set({
-          info: {
-            firstName,
-            lastName,
-            email
-          }
-        });
+    auth.createUserAndRetrieveDataWithEmailAndPassword(email, password).then(user => {
+      database.ref('users/' + user.user.uid).set({
+        info: {
+          firstName,
+          lastName,
+          email
+        }
       });
+      dispatch(reset('signup'));
+    });
   };
 };
 
-export const logIn = (values: user): ThunkAction => {
+export const logIn = (values: { email: string, password: string }): ThunkAction => {
   return dispatch => {
     const { email, password } = values;
     dispatch({ type: 'ATTEMPTING_LOGIN' });
@@ -40,14 +40,17 @@ export const logOut = (): ThunkAction => {
 export const loggedIn = (
   user: { email: string, uid: string },
   info: { firstName: string, lastName: string }
-): Action => {
+): ThunkAction => {
   $('#signUpModal, #logInModal').modal('hide');
-  return {
-    type: 'LOGGED_IN',
-    email: user.email,
-    uid: user.uid,
-    firstName: info.firstName,
-    lastName: info.lastName
+  return dispatch => {
+    dispatch({
+      type: 'LOGGED_IN',
+      email: user.email,
+      uid: user.uid,
+      firstName: info.firstName,
+      lastName: info.lastName
+    });
+    dispatch(reset('login'));
   };
 };
 

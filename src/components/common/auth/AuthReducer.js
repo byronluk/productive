@@ -1,7 +1,7 @@
 // @flow
 
 import initialState from '../../../initialState';
-import { Action } from '../../types';
+import type { Action } from '../../types';
 
 type State = {
   +status: ?string,
@@ -28,7 +28,6 @@ export default function authReducer(state: State = initialState.auth, action: Ac
       return initialState.auth;
 
     default:
-      (action: empty);
       return state;
   }
 }

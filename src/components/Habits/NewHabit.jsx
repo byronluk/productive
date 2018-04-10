@@ -1,28 +1,43 @@
 // @flow
 import React from 'react';
-import { Field, Fields, reduxForm } from 'redux-form';
-import type { FormProps } from 'redux-form';
 import DailySelector from './DailySelector';
 import WeeklySelector from './WeeklySelector';
 
 // TODO: rewrite component to not rely on redux form
+// TODO: Keep track of day values in this components state and pass it down to daily selector as props
+// TODO: Repeat with weekly selctor
 
 type Props = {
-  ...FormProps,
   onSubmit: () => void,
   toggleDays: () => void
 };
 type State = {
-  habitType: string
+  name: string,
+  type: string
 };
 
 class NewHabit extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      habitType: 'daily'
+      name: '',
+      type: 'daily'
     };
   }
+
+  handleChange = event => {
+    console.log(event.currentTarget);
+    const { name, value } = event.currentTarget;
+    this.setState({
+      [[name]]: value
+    });
+  };
+
+  handleSubmit = event => {
+    const { onSubmit } = this.props;
+    event.preventDefault();
+    onSubmit(this.state);
+  };
 
   habitTypeClick = (event): void => {
     const { value } = event.target;
@@ -35,82 +50,89 @@ class NewHabit extends React.Component<Props, State> {
   };
 
   render() {
-    const { handleSubmit, toggleDays } = this.props;
-    const { habitType } = this.state;
+    const { toggleDays } = this.props;
     return (
       <div className="modal-dialog" role="document">
-        <form className="modal-content" onSubmit={handleSubmit}>
+        <form className="modal-content" onSubmit={this.handleSubmit}>
           <div className="modal-header">
             <h5 className="modal-title" id="addHabitModalLabel">
               New Habit
             </h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div className="modal-body">
             <div className="form-group">
-              <Field
-                name="habitName"
-                component="input"
+              <input
+                name="name"
                 type="text"
+                onChange={this.handleChange}
                 className="form-control"
                 placeholder="habit name"
               />
             </div>
             <div className="form-group container">
               <p className="lead text-center">I want to repeat this habit</p>
-              <div className="btn-group-toggle row justify-content-around mb-4">
+              <div
+                className="btn-group-toggle row justify-content-around mb-4"
+                data-toggle="buttons"
+              >
                 <label
-                  className={`btn btn-outline-dark btn-block col-5 border-0' 
-                    ${habitType === 'daily' ? 'active' : ''}`}
+                  className="btn btn-outline-dark btn-block col-5 border-0 active"
                   data-toggle="collapse"
                   data-target="#dailySelectCollapse"
                   role="button"
                   aria-expanded="false"
                   aria-controls="dailySelectCollapse"
                 >
-                  <Field
-                    component="input"
+                  <input
                     type="radio"
-                    name="habitType"
+                    name="type"
                     value="daily"
                     autoComplete="off"
-                    onClick={this.habitTypeClick}
+                    onFocus={this.handleChange}
                   />
                   Daily
                 </label>
                 <span className="lead">or</span>
                 <label
-                  className={`btn btn-outline-dark btn-block col-5 border-0 my-0 
-                    ${habitType === 'weekly' ? 'active' : ''}`}
+                  className="btn btn-outline-dark btn-block col-5 border-0 my-0"
                   data-toggle="collapse"
                   data-target="#weeklySelectCollapse"
                   role="button"
                   aria-expanded="false"
                   aria-controls="weeklySelectCollapse"
                 >
-                  <Field
-                    component="input"
+                  <input
                     type="radio"
-                    name="habitType"
+                    name="type"
                     value="weekly"
                     autoComplete="off"
-                    onClick={this.habitTypeClick}
+                    onFocus={this.handleChange}
                   />
                   Weekly
                 </label>
               </div>
               <div id="accordion">
-                <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
-                  <Fields
-                    names={['day.M', 'day.T', 'day.W', 'day.Th', 'day.F', 'day.S', 'day.Su']}
-                    component={DailySelector}
-                    toggleDays={toggleDays}
-                  />
+                <div
+                  className="collapse show"
+                  id="dailySelectCollapse"
+                  data-parent="#accordion"
+                >
+                  <DailySelector toggleDays={toggleDays} />
                 </div>
-                <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
-                  <Fields names={['week', 'biweekly']} component={WeeklySelector} />
+                <div
+                  className="collapse"
+                  id="weeklySelectCollapse"
+                  data-parent="#accordion"
+                >
+                  <WeeklySelector names={['week', 'biweekly']} />
                 </div>
               </div>
             </div>
@@ -158,7 +180,11 @@ class NewHabit extends React.Component<Props, State> {
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              data-dismiss="modal"
+            >
               Close
             </button>
             <button type="submit" className="btn btn-primary">
@@ -177,9 +203,5 @@ class NewHabit extends React.Component<Props, State> {
  * for 2 hours each rep. 
  * habit name -- daily -- days in week -- repetition && duration
  */
-
-NewHabit = reduxForm({
-  form: 'newHabit'
-})(NewHabit);
 
 export default NewHabit;

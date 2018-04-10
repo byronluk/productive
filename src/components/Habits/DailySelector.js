@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import type { FieldProps } from 'redux-form';
-import { formValues } from 'redux-form';
 
 type Props = {
   day: {
@@ -27,7 +26,11 @@ type State = {
   weekdays: string,
   weekends: string
 };
-// attempt to add in focus trigger for recent events
+/* TODO: add a component will recieve props for prop changes in value
+ * let the value determine the class/apperance of each toggle instead of having separate controllers
+ * NewHabit will hold the state for the value and pass down day values to this component
+ */
+
 class DailySelector extends React.Component<Props, State> {
   constructor() {
     super();
@@ -45,7 +48,7 @@ class DailySelector extends React.Component<Props, State> {
   }
   // loop through state to change focus and active classes on days
   handleDayClick = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
-    let day = event.currentTarget.name.substr(4);
+    let day = event.currentTarget.name;
     this.setState(prevState => {
       const stateCopy = Object.assign({}, prevState);
       for (let prop in stateCopy) {
@@ -61,14 +64,8 @@ class DailySelector extends React.Component<Props, State> {
     });
   };
 
-  handleChange = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
-    console.log(event.currentTarget.name.substr(4));
-    console.log(event.currentTarget.value);
-  };
-
   handleBlur = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
-    let day = event.currentTarget.name.substr(4);
-    console.log(day);
+    let day = event.currentTarget.name;
     this.setState(prevState => {
       const stateCopy = Object.assign({}, prevState);
       stateCopy[day] = stateCopy[day].trim().replace(/focus/, '');
@@ -109,7 +106,6 @@ class DailySelector extends React.Component<Props, State> {
     });
   };
   render() {
-    const { day } = this.props;
     const { Su, M, T, W, Th, F, S, weekdays, weekends } = this.state;
     return (
       <React.Fragment>
@@ -119,9 +115,9 @@ class DailySelector extends React.Component<Props, State> {
         >
           <label className={`btn btn-outline-secondary border-0 ${Su}`}>
             <input
-              {...day.Su.input}
               onClick={this.handleDayClick}
               onBlur={this.handleBlur}
+              name="Su"
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -130,9 +126,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${M}`}>
             <input
-              {...day.M.input}
               onClick={this.handleDayClick}
               onBlur={this.handleBlur}
+              name="M"
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -141,9 +137,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${T}`}>
             <input
-              {...day.T.input}
               onClick={this.handleDayClick}
               onBlur={this.handleBlur}
+              name="T"
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -152,9 +148,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${W}`}>
             <input
-              {...day.W.input}
               onClick={this.handleDayClick}
               onBlur={this.handleBlur}
+              name="W"
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -163,9 +159,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${Th}`}>
             <input
-              {...day.Th.input}
               onClick={this.handleDayClick}
               onBlur={this.handleBlur}
+              name="Th"
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -174,9 +170,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${F}`}>
             <input
-              {...day.F.input}
               onClick={this.handleDayClick}
               onBlur={this.handleBlur}
+              name="F"
               defaultChecked
               type="checkbox"
               autoComplete="off"
@@ -185,9 +181,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${S}`}>
             <input
-              {...day.S.input}
               onClick={this.handleDayClick}
               onBlur={this.handleBlur}
+              name="S"
               defaultChecked
               type="checkbox"
               autoComplete="off"

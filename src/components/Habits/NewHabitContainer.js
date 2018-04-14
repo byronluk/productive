@@ -3,6 +3,7 @@
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import NewHabit from './NewHabit';
+import type { State } from './NewHabit';
 
 const mapStateToProps = () => {
   return {

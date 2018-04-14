@@ -2,30 +2,40 @@
 import React from 'react';
 import DailySelector from './DailySelector';
 import WeeklySelector from './WeeklySelector';
+import type { days } from '../types';
 
 // TODO: rewrite component to not rely on redux form
 // TODO: Keep track of day values in this components state and pass it down to daily selector as props
 // TODO: Repeat with weekly selctor
 
 type Props = {
-  onSubmit: () => void,
-  toggleDays: () => void
+  onSubmit: (values: State) => void
 };
-type State = {
+export type State = {
   name: string,
-  type: string
+  type: string,
+  days: days
 };
 
 class NewHabit extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       name: '',
-      type: 'daily'
+      type: 'daily',
+      days: {
+        M: true,
+        T: true,
+        W: true,
+        Th: true,
+        F: true,
+        S: true,
+        Su: true
+      }
     };
   }
 
-  handleChange = event => {
+  handleChange = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
     console.log(event.currentTarget);
     const { name, value } = event.currentTarget;
     this.setState({
@@ -33,21 +43,30 @@ class NewHabit extends React.Component<Props, State> {
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
     const { onSubmit } = this.props;
     event.preventDefault();
     onSubmit(this.state);
   };
 
-  habitTypeClick = (event): void => {
-    const { value } = event.target;
-    if (this.state.habitType === value) {
-      return;
-    }
-    this.setState({
-      habitType: value
+  handleDayClick = (event: SyntheticMouseEvent<HTMLInputElement>): void => {
+    const { name } = event.currentTarget;
+    this.setState(prevState => {
+      const days = Object.assign(prevState.days);
+      days[name] = !days[name];
+      return { days };
     });
   };
+
+  // habitTypeClick = (event: SyntheticMouseEvent<HTMLInputElement>): void => {
+  //   const { value } = event.target;
+  //   if (this.state.habitType === value) {
+  //     return;
+  //   }
+  //   this.setState({
+  //     habitType: value
+  //   });
+  // };
 
   render() {
     const { toggleDays } = this.props;
@@ -58,12 +77,7 @@ class NewHabit extends React.Component<Props, State> {
             <h5 className="modal-title" id="addHabitModalLabel">
               New Habit
             </h5>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -120,18 +134,10 @@ class NewHabit extends React.Component<Props, State> {
                 </label>
               </div>
               <div id="accordion">
-                <div
-                  className="collapse show"
-                  id="dailySelectCollapse"
-                  data-parent="#accordion"
-                >
-                  <DailySelector toggleDays={toggleDays} />
+                <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
+                  <DailySelector days={this.state.days} onClick={this.handleDayClick} />
                 </div>
-                <div
-                  className="collapse"
-                  id="weeklySelectCollapse"
-                  data-parent="#accordion"
-                >
+                <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
                   <WeeklySelector names={['week', 'biweekly']} />
                 </div>
               </div>
@@ -180,11 +186,7 @@ class NewHabit extends React.Component<Props, State> {
             </div>
           </div>
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-            >
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">
               Close
             </button>
             <button type="submit" className="btn btn-primary">

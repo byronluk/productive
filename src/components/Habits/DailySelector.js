@@ -1,39 +1,22 @@
 // @flow
 import * as React from 'react';
-import type { FieldProps } from 'redux-form';
+import type { days, daysClass } from '../types';
 
 type Props = {
-  day: {
-    Su: FieldProps,
-    M: FieldProps,
-    T: FieldProps,
-    W: FieldProps,
-    Th: FieldProps,
-    F: FieldProps,
-    S: FieldProps
-  },
-  toggleDays: (type: string) => void
+  onClick: () => void,
+  days: days
 };
 
-type State = {
-  Su: string,
-  M: string,
-  T: string,
-  W: string,
-  Th: string,
-  F: string,
-  S: string,
-  weekdays: string,
-  weekends: string
-};
+type State = daysClass;
 /* TODO: add a component will recieve props for prop changes in value
  * let the value determine the class/apperance of each toggle instead of having separate controllers
  * NewHabit will hold the state for the value and pass down day values to this component
  */
 
 class DailySelector extends React.Component<Props, State> {
-  constructor() {
-    super();
+  constructor(props: Props) {
+    console.log(props);
+    super(props);
     this.state = {
       Su: 'active',
       M: 'active',
@@ -41,11 +24,15 @@ class DailySelector extends React.Component<Props, State> {
       W: 'active',
       Th: 'active',
       F: 'active',
-      S: 'active',
-      weekdays: '',
-      weekends: ''
+      S: 'active'
     };
   }
+
+  static getDerivedStateFromProps(nextProps: State, prevState: State): State | null {
+    console.log(nextProps, prevState);
+    return null;
+  }
+
   // loop through state to change focus and active classes on days
   handleDayClick = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
     let day = event.currentTarget.name;
@@ -84,9 +71,7 @@ class DailySelector extends React.Component<Props, State> {
       W: 'active',
       Th: 'active',
       F: 'active',
-      S: '',
-      weekdays: 'active',
-      weekends: ''
+      S: ''
     });
   };
 
@@ -100,13 +85,12 @@ class DailySelector extends React.Component<Props, State> {
       W: '',
       Th: '',
       F: '',
-      S: 'active',
-      weekdays: '',
-      weekends: 'active'
+      S: 'active'
     });
   };
   render() {
-    const { Su, M, T, W, Th, F, S, weekdays, weekends } = this.state;
+    const { Su, M, T, W, Th, F, S } = this.state;
+    const { onClick, days } = this.props;
     return (
       <React.Fragment>
         <div
@@ -115,8 +99,9 @@ class DailySelector extends React.Component<Props, State> {
         >
           <label className={`btn btn-outline-secondary border-0 ${Su}`}>
             <input
-              onClick={this.handleDayClick}
+              onClick={onClick}
               onBlur={this.handleBlur}
+              value={days.Su}
               name="Su"
               defaultChecked
               type="checkbox"
@@ -126,8 +111,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${M}`}>
             <input
-              onClick={this.handleDayClick}
+              onClick={onClick}
               onBlur={this.handleBlur}
+              value={days.M}
               name="M"
               defaultChecked
               type="checkbox"
@@ -137,8 +123,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${T}`}>
             <input
-              onClick={this.handleDayClick}
+              onClick={onClick}
               onBlur={this.handleBlur}
+              value={days.T}
               name="T"
               defaultChecked
               type="checkbox"
@@ -148,8 +135,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${W}`}>
             <input
-              onClick={this.handleDayClick}
+              onClick={onClick}
               onBlur={this.handleBlur}
+              value={days.W}
               name="W"
               defaultChecked
               type="checkbox"
@@ -159,8 +147,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${Th}`}>
             <input
-              onClick={this.handleDayClick}
+              onClick={onClick}
               onBlur={this.handleBlur}
+              value={days.Th}
               name="Th"
               defaultChecked
               type="checkbox"
@@ -170,8 +159,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${F}`}>
             <input
-              onClick={this.handleDayClick}
+              onClick={onClick}
               onBlur={this.handleBlur}
+              value={days.F}
               name="F"
               defaultChecked
               type="checkbox"
@@ -181,8 +171,9 @@ class DailySelector extends React.Component<Props, State> {
           </label>
           <label className={`btn btn-outline-secondary border-0 ${S}`}>
             <input
-              onClick={this.handleDayClick}
+              onClick={onClick}
               onBlur={this.handleBlur}
+              value={days.S}
               name="S"
               defaultChecked
               type="checkbox"
@@ -193,18 +184,16 @@ class DailySelector extends React.Component<Props, State> {
         </div>
         <div className="row">
           <button
-            className={`btn btn-sm btn-outline-info btn-block col mx-1 ${weekdays}`}
+            className="btn btn-sm btn-outline-info btn-block col mx-1"
             type="button"
             value="weekdays"
-            onClick={this.toggleWeekdays}
           >
             Weekdays
           </button>
           <button
-            className={`btn btn-sm btn-outline-info btn-block col mx-1 my-0 ${weekends}`}
+            className="btn btn-sm btn-outline-info btn-block col mx-1 my-0"
             type="button"
             value="weekends"
-            onClick={this.toggleWeekends}
           >
             Weekends
           </button>

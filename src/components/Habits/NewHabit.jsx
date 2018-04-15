@@ -4,10 +4,6 @@ import DailySelector from './DailySelector';
 import WeeklySelector from './WeeklySelector';
 import type { days } from '../types';
 
-// TODO: rewrite component to not rely on redux form
-// TODO: Keep track of day values in this components state and pass it down to daily selector as props
-// TODO: Repeat with weekly selctor
-
 type Props = {
   onSubmit: (values: State) => void
 };
@@ -36,7 +32,6 @@ class NewHabit extends React.Component<Props, State> {
   }
 
   handleChange = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
-    console.log(event.currentTarget);
     const { name, value } = event.currentTarget;
     this.setState({
       [[name]]: value
@@ -58,18 +53,30 @@ class NewHabit extends React.Component<Props, State> {
     });
   };
 
-  // habitTypeClick = (event: SyntheticMouseEvent<HTMLInputElement>): void => {
-  //   const { value } = event.target;
-  //   if (this.state.habitType === value) {
-  //     return;
-  //   }
-  //   this.setState({
-  //     habitType: value
-  //   });
-  // };
+  toggleDays = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
+    const { name } = event.currentTarget;
+    const weekdays = {
+      M: true,
+      T: true,
+      W: true,
+      Th: true,
+      F: true,
+      S: false,
+      Su: false
+    };
+    console.log(name);
+    if (name === 'weekends') {
+      for (let day in weekdays) {
+        weekdays[day] = !weekdays[day];
+      }
+    }
+    console.log(weekdays);
+    this.setState({
+      days: weekdays
+    });
+  };
 
   render() {
-    const { toggleDays } = this.props;
     return (
       <div className="modal-dialog" role="document">
         <form className="modal-content" onSubmit={this.handleSubmit}>
@@ -135,7 +142,11 @@ class NewHabit extends React.Component<Props, State> {
               </div>
               <div id="accordion">
                 <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
-                  <DailySelector days={this.state.days} onClick={this.handleDayClick} />
+                  <DailySelector
+                    days={this.state.days}
+                    onClick={this.handleDayClick}
+                    toggleDays={this.toggleDays}
+                  />
                 </div>
                 <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
                   <WeeklySelector names={['week', 'biweekly']} />

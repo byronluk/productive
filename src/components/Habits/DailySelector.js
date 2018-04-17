@@ -11,7 +11,7 @@ type Props = {
 
 type State = daysClass;
 
-class DailySelector extends React.Component<Props, State> {
+class DailySelector extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -25,9 +25,12 @@ class DailySelector extends React.Component<Props, State> {
     };
   }
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State): State | null {
+  static getDerivedStateFromProps(
+    nextProps: Props,
+    prevState: State
+  ): State | null {
     const { days } = nextProps;
-    const nextState = Object.assign(prevState);
+    const nextState = Object.assign({}, prevState);
     for (let day in days) {
       //  if day doesn't need to be changed
       if (days[day] && /active/.test(nextState[day])) {

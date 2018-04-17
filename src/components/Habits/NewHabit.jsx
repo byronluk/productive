@@ -47,7 +47,7 @@ class NewHabit extends React.Component<Props, State> {
   handleDayClick = (event: SyntheticMouseEvent<HTMLInputElement>): void => {
     const { name } = event.currentTarget;
     this.setState(prevState => {
-      const days = Object.assign(prevState.days);
+      const days = Object.assign({}, prevState.days);
       days[name] = !days[name];
       return { days };
     });
@@ -84,7 +84,12 @@ class NewHabit extends React.Component<Props, State> {
             <h5 className="modal-title" id="addHabitModalLabel">
               New Habit
             </h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -141,14 +146,22 @@ class NewHabit extends React.Component<Props, State> {
                 </label>
               </div>
               <div id="accordion">
-                <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
+                <div
+                  className="collapse show"
+                  id="dailySelectCollapse"
+                  data-parent="#accordion"
+                >
                   <DailySelector
                     days={this.state.days}
                     onClick={this.handleDayClick}
                     toggleDays={this.toggleDays}
                   />
                 </div>
-                <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
+                <div
+                  className="collapse"
+                  id="weeklySelectCollapse"
+                  data-parent="#accordion"
+                >
                   <WeeklySelector names={['week', 'biweekly']} />
                 </div>
               </div>
@@ -197,7 +210,11 @@ class NewHabit extends React.Component<Props, State> {
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              data-dismiss="modal"
+            >
               Close
             </button>
             <button type="submit" className="btn btn-primary">

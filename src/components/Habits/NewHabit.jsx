@@ -2,7 +2,7 @@
 import React from 'react';
 import DailySelector from './DailySelector';
 import WeeklySelector from './WeeklySelector';
-import type { days } from '../types';
+import type { days, weekly } from './types';
 
 type Props = {
   onSubmit: (values: State) => void
@@ -10,7 +10,12 @@ type Props = {
 export type State = {
   name: string,
   type: string,
-  days: days
+  days: days,
+  weekly: weekly,
+  hasMultiple: boolean,
+  multiple: number,
+  hasDuration: boolean,
+  minutes: number
 };
 
 class NewHabit extends React.Component<Props, State> {
@@ -27,12 +32,25 @@ class NewHabit extends React.Component<Props, State> {
         F: true,
         S: true,
         Su: true
-      }
+      },
+      weekly: {
+        times: 5,
+        biWeekly: false
+      },
+      hasMultiple: false,
+      multiple: 0,
+      hasDuration: false,
+      minutes: 0
     };
   }
 
   handleChange = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
-    const { name, value } = event.currentTarget;
+    let { name, value } = event.currentTarget;
+
+    // string => boolean conversion for checkboxes
+    if (/^has/.test(name)) {
+      value = value === 'true' ? false : true;
+    }
     this.setState({
       [[name]]: value
     });
@@ -53,6 +71,20 @@ class NewHabit extends React.Component<Props, State> {
     });
   };
 
+  handleWeekClick = (event: SyntheticMouseEvent<HTMLInputElement>): void => {
+    console.log(event.currentTarget.name);
+    const { name, value } = event.currentTarget;
+    this.setState(prevState => {
+      const weekly = Object.assign({}, prevState.weekly);
+      if (name === 'biWeekly') {
+        weekly[name] = !weekly[name];
+      } else {
+        weekly[name] = value;
+      }
+      return { weekly };
+    });
+  };
+
   toggleDays = (event: SyntheticMouseEvent<HTMLButtonElement>): void => {
     const { name } = event.currentTarget;
     const weekdays = {
@@ -64,13 +96,11 @@ class NewHabit extends React.Component<Props, State> {
       S: false,
       Su: false
     };
-    console.log(name);
     if (name === 'weekends') {
       for (let day in weekdays) {
         weekdays[day] = !weekdays[day];
       }
     }
-    console.log(weekdays);
     this.setState({
       days: weekdays
     });
@@ -84,12 +114,7 @@ class NewHabit extends React.Component<Props, State> {
             <h5 className="modal-title" id="addHabitModalLabel">
               New Habit
             </h5>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -146,23 +171,15 @@ class NewHabit extends React.Component<Props, State> {
                 </label>
               </div>
               <div id="accordion">
-                <div
-                  className="collapse show"
-                  id="dailySelectCollapse"
-                  data-parent="#accordion"
-                >
+                <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
                   <DailySelector
                     days={this.state.days}
                     onClick={this.handleDayClick}
                     toggleDays={this.toggleDays}
                   />
                 </div>
-                <div
-                  className="collapse"
-                  id="weeklySelectCollapse"
-                  data-parent="#accordion"
-                >
-                  <WeeklySelector names={['week', 'biweekly']} />
+                <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
+                  <WeeklySelector weekly={this.state.weekly} onClick={this.handleWeekClick} />
                 </div>
               </div>
             </div>
@@ -180,7 +197,13 @@ class NewHabit extends React.Component<Props, State> {
                   aria-expanded="false"
                   aria-controls="setMultipleCollapse"
                 >
-                  <input type="checkbox" autoComplete="off" />
+                  <input
+                    type="checkbox"
+                    name="hasMultiple"
+                    onFocus={this.handleChange}
+                    value={this.state.hasMultiple}
+                    autoComplete="off"
+                  />
                   Set Multiple
                 </label>
                 <label
@@ -191,34 +214,52 @@ class NewHabit extends React.Component<Props, State> {
                   aria-expanded="false"
                   aria-controls="setDurationCollapse"
                 >
-                  <input type="checkbox" autoComplete="off" />
+                  <input
+                    type="checkbox"
+                    name="hasDuration"
+                    onFocus={this.handleChange}
+                    value={this.state.hasDuration}
+                    autoComplete="off"
+                  />
                   Set Duration
                 </label>
               </div>
               <div className="row">
                 <div className="col-6">
-                  <div className="collapse" id="setMultipleCollapse">
-                    <input className="form-control ml-2 w-25" type="number" />
+                  <div className="collapse form-inline" id="setMultipleCollapse">
+                    <input
+                      className="form-control mx-2 w-25"
+                      name="multiple"
+                      value={this.state.multiple}
+                      onChange={this.handleChange}
+                      type="number"
+                    />
+                    times
                   </div>
                 </div>
                 <div className="col-6">
-                  <div className="collapse" id="setDurationCollapse">
-                    <input className="form-control ml-2 w-25" type="number" />
+                  <div className="collapse form-inline" id="setDurationCollapse">
+                    <input
+                      className="form-control mx-2"
+                      style={{ width: '35%' }}
+                      name="minutes"
+                      value={this.state.minutes}
+                      onChange={this.handleChange}
+                      type="number"
+                      step="30"
+                    />
+                    minutes
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
             <button type="submit" className="btn btn-primary">
               Create Habit
+            </button>
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">
+              Close
             </button>
           </div>
         </form>
@@ -226,7 +267,8 @@ class NewHabit extends React.Component<Props, State> {
     );
   }
 }
-/* add text for what type of habit I am going to create
+
+/* TODO: add text for what type of habit I am going to create
  * e.g. I want to medidate 
  * 3 times daily
  * on Sunday, Monday, and Tuesday

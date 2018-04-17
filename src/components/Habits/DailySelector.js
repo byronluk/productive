@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import isEqual from 'lodash.isequal';
-import type { days, daysClass } from '../types';
+import type { days, daysClass } from './types';
 
 type Props = {
   onClick: (event: SyntheticMouseEvent<HTMLInputElement>) => void,
@@ -25,10 +25,7 @@ class DailySelector extends React.PureComponent<Props, State> {
     };
   }
 
-  static getDerivedStateFromProps(
-    nextProps: Props,
-    prevState: State
-  ): State | null {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State): State | null {
     const { days } = nextProps;
     const nextState = Object.assign({}, prevState);
     for (let day in days) {

@@ -12,7 +12,6 @@
   "author": "Byron Luk",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "firebase": "^4.9.1",
     "lodash.isequal": "^4.5.0",
@@ -28,6 +27,7 @@
     "redux-promise-middleware": "^5.0.0",
     "redux-thunk": "^2.2.0",
     "serve-favicon": "^2.4.5",
+    "style-loader": "^0.21.0",
     "webpack": "^3.11.0"
   },
   "devDependencies": {
@@ -41,6 +41,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.26.0",
+    "css-loader": "^0.28.11",
+    "copy-webpack-plugin": "^4.5.1",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-flowtype": "^2.46.1",

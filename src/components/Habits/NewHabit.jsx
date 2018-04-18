@@ -114,7 +114,12 @@ class NewHabit extends React.Component<Props, State> {
             <h5 className="modal-title" id="addHabitModalLabel">
               New Habit
             </h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -171,15 +176,26 @@ class NewHabit extends React.Component<Props, State> {
                 </label>
               </div>
               <div id="accordion">
-                <div className="collapse show" id="dailySelectCollapse" data-parent="#accordion">
+                <div
+                  className="collapse show"
+                  id="dailySelectCollapse"
+                  data-parent="#accordion"
+                >
                   <DailySelector
                     days={this.state.days}
                     onClick={this.handleDayClick}
                     toggleDays={this.toggleDays}
                   />
                 </div>
-                <div className="collapse" id="weeklySelectCollapse" data-parent="#accordion">
-                  <WeeklySelector weekly={this.state.weekly} onClick={this.handleWeekClick} />
+                <div
+                  className="collapse"
+                  id="weeklySelectCollapse"
+                  data-parent="#accordion"
+                >
+                  <WeeklySelector
+                    weekly={this.state.weekly}
+                    onClick={this.handleWeekClick}
+                  />
                 </div>
               </div>
             </div>
@@ -226,7 +242,10 @@ class NewHabit extends React.Component<Props, State> {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <div className="collapse form-inline" id="setMultipleCollapse">
+                  <div
+                    className="collapse form-inline"
+                    id="setMultipleCollapse"
+                  >
                     <input
                       className="form-control mx-2 w-25"
                       name="multiple"
@@ -238,7 +257,10 @@ class NewHabit extends React.Component<Props, State> {
                   </div>
                 </div>
                 <div className="col-6">
-                  <div className="collapse form-inline" id="setDurationCollapse">
+                  <div
+                    className="collapse form-inline"
+                    id="setDurationCollapse"
+                  >
                     <input
                       className="form-control mx-2"
                       style={{ width: '35%' }}
@@ -258,7 +280,11 @@ class NewHabit extends React.Component<Props, State> {
             <button type="submit" className="btn btn-primary">
               Create Habit
             </button>
-            <button type="button" className="btn btn-secondary" data-dismiss="modal">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              data-dismiss="modal"
+            >
               Close
             </button>
           </div>

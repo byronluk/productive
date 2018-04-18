@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, '/src'),
@@ -13,7 +14,10 @@ module.exports = {
     path: path.join(__dirname, '/dist')
   },
 
-  plugins: [new HtmlWebpackPlugin({ template: 'index.html' })],
+  plugins: [
+    new HtmlWebpackPlugin({ template: 'index.html' }),
+    new CopyWebpackPlugin([{ from: 'bootstrap', to: 'bootstrap' }])
+  ],
 
   resolve: {
     alias: {
@@ -32,6 +36,10 @@ module.exports = {
       {
         test: /\.html$/,
         loader: ['html-loader']
+      },
+      {
+        test: /\.css$/,
+        loader: ['style-loader', 'css-loader']
       }
     ]
   }

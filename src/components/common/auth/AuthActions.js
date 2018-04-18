@@ -9,20 +9,25 @@ export const createAccount = (values: user): ThunkAction => {
   return dispatch => {
     const { firstName, lastName, email, password } = values;
     dispatch({ type: 'CREATING_ACCOUNT' });
-    auth.createUserAndRetrieveDataWithEmailAndPassword(email, password).then(user => {
-      database.ref('users/' + user.user.uid).set({
-        info: {
-          firstName,
-          lastName,
-          email
-        }
+    auth
+      .createUserAndRetrieveDataWithEmailAndPassword(email, password)
+      .then(user => {
+        database.ref('users/' + user.user.uid).set({
+          info: {
+            firstName,
+            lastName,
+            email
+          }
+        });
+        dispatch(reset('signup'));
       });
-      dispatch(reset('signup'));
-    });
   };
 };
 
-export const logIn = (values: { email: string, password: string }): ThunkAction => {
+export const logIn = (values: {
+  email: string,
+  password: string
+}): ThunkAction => {
   return dispatch => {
     const { email, password } = values;
     dispatch({ type: 'ATTEMPTING_LOGIN' });
